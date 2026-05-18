@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<scenario>
+    <environment>
+        <!-- NED definition -->
+        <ned latitude="40.0" longitude="3.0"/> <!-- geographic coordinates of the NED origin -->
+        <!-- ocean definitions -->
+        <ocean>
+            <water density="1031.0" jerlov="0.2" temperature="15.0"/>
+            <waves height="0.0"/>
+            <particles enabled="true"/>
+            <current type="uniform">
+                <velocity xyz="0.0 0.0 0.0"/>
+            </current>
+        </ocean>
+        <!-- atmosphere definitions -->
+        <atmosphere>
+            <sun azimuth="20.0" elevation="50.0"/>
+            <conditions temperature="20.0" pressure="101300.0" humidity="0.5"/>
+            <wind type="uniform">
+                <velocity xyz="0.0 0.0 0.0"/>
+            </wind>
+        </atmosphere>
+    </environment>
+    <materials>
+        <material name="Aluminium" density="2710.0" restitution="0.7"/>
+        <material name="Steel" density="7891.0" restitution="0.9"/>
+        <friction_table>
+            <friction material1="Aluminium" material2="Aluminium" static="0.7" dynamic="0.4"/>
+            <friction material1="Steel" material2="Steel" static="0.4" dynamic="0.1"/>
+            <friction material1="Aluminium" material2="Steel" static="0.8" dynamic="0.5"/>
+        </friction_table>
+    </materials>
+    <!-- Definitions of looks, bodies, robots, sensors... -->
+
+
+
+    <looks>
+        <look name="Yellow" rgb="1.0 0.9 0.0" roughness="0.3"/>
+        <look name="Gray" gray="0.3" roughness="0.4" metalness="0.5"/>
+    </looks>
+
+    <static name="Floor" type="plane">
+        <material name="Steel"/>
+        <look name="Yellow"/>
+        <world_transform xyz="0.0 0.0 5.0" rpy="0.0 0.0 0.0"/>
+    </static>
+
+    <static name="Wall" type="box">
+        <dimensions xyz="10.0 0.2 5.0"/>
+        <material name="Steel"/>
+        <look name="Gray"/>
+        <world_transform xyz="0.0 5.0 2.0" rpy="0.0 0.0 0.0"/>
+    </static>
+
+    <!-- BOXY -->
+
+    <robot name="Boxy" fixed="false" self_collisions="false">
+    <base_link name="Base" type="box" physics="submerged">
+        <dimensions xyz="1.0 0.5 0.2"/>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <material name="Steel"/>
+        <look name="Green"/>
+    </base_link>
+   
+    <sensor name="IMU" type="imu" rate="10.0">
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <link name="Base"/>
+        <ros_publisher topic="/boxy/imu"/>
+    </sensor>
+
+    <sensor name="Cam" rate="10.0" type="camera">
+        <specs resolution_x="800" resolution_y="600" horizontal_fov="60.0"/>
+        <origin xyz="1.1 0.0 0.1" rpy="1.570796 0.0 1.570796"/>
+        <link name="Base"/>
+        <ros_publisher topic="/boxy/camera"/>
+    </sensor>
+
+    <sensor name="base_link" rate="10.0" type="odometry">
+        <history samples="1"/>
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <link name="Base"/>
+        <ros_publisher topic="/boxy/odometry"/>
+    </sensor>
+
+    <world_transform xyz="0.0 0.0 2.0" rpy="0.0 0.0 0.0"/>
+</robot>
+
+
+</scenario>
