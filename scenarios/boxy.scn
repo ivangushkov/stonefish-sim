@@ -1,4 +1,13 @@
 <?xml version="1.0"?>
+
+<!-- TODO: fix something a bit more automatic for the distances -->
+<!DOCTYPE scenario [
+  <!ENTITY lx "67.69">
+  <!ENTITY ly1 "0.5">
+  <!ENTITY ly1 "0.4">
+  <!-- .... -->
+]>
+
 <scenario>
     <environment>
         <!-- NED definition -->
@@ -37,6 +46,7 @@
     <looks>
         <look name="Yellow" rgb="1.0 0.9 0.0" roughness="0.3"/>
         <look name="Gray" gray="0.3" roughness="0.4" metalness="0.5"/>
+        <look name="Red" rgb="1.0 0.0 0.0" roughness="0.3"/>
     </looks>
 
     <static name="Floor" type="plane">
@@ -55,35 +65,87 @@
     <!-- BOXY -->
 
     <robot name="Boxy" fixed="false" self_collisions="false">
-    <base_link name="Base" type="box" physics="submerged">
-        <dimensions xyz="1.0 0.5 0.2"/>
-        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-        <material name="Steel"/>
-        <look name="Green"/>
-    </base_link>
+        <base_link name="Base" type="box" physics="submerged">
+            <dimensions xyz="1.0 0.5 0.2"/>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <material name="Steel"/>
+            <look name="Green"/>
+        </base_link>
+    
+        <sensor name="IMU" type="imu" rate="10.0">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <link name="Base"/>
+            <ros_publisher topic="/boxy/imu"/>
+        </sensor>
+
+        <sensor name="Cam" rate="10.0" type="camera">
+            <specs resolution_x="800" resolution_y="600" horizontal_fov="60.0"/>
+            <origin xyz="1.1 0.0 0.1" rpy="1.570796 0.0 1.570796"/>
+            <link name="Base"/>
+            <ros_publisher topic="/boxy/camera"/>
+        </sensor>
+
+        <sensor name="base_link" rate="10.0" type="odometry">
+            <history samples="1"/>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <link name="Base"/>
+            <ros_publisher topic="/boxy/odometry"/>
+        </sensor>
    
-    <sensor name="IMU" type="imu" rate="10.0">
-        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-        <link name="Base"/>
-        <ros_publisher topic="/boxy/imu"/>
-    </sensor>
+        <actuator name="T1" type="simple_thruster">
+            <specs lower_thrust_limit="-100.0" upper_thrust_limit="100.0" inverted="false"/>
+            <propeller right="true">
+                <mesh filename="Cylinder.obj" scale="0.02"/>
+                <material name="Steel"/>
+                <look name="Red"/>
+            </propeller>
+            <origin xyz="0.4 0.3 0.0" rpy="0.0 0.0 0.0"/>
+            <link name="Base"/>
+            <watchdog timeout="1.0"/>
+        </actuator>
 
-    <sensor name="Cam" rate="10.0" type="camera">
-        <specs resolution_x="800" resolution_y="600" horizontal_fov="60.0"/>
-        <origin xyz="1.1 0.0 0.1" rpy="1.570796 0.0 1.570796"/>
-        <link name="Base"/>
-        <ros_publisher topic="/boxy/camera"/>
-    </sensor>
+        <actuator name="T2" type="simple_thruster">
+            <specs lower_thrust_limit="-100.0" upper_thrust_limit="100.0" inverted="false"/>
+            <propeller right="true">
+                <mesh filename="Cylinder.obj" scale="0.02"/>
+                <material name="Steel"/>
+                <look name="Red"/>
+            </propeller>
+            <origin xyz="-0.4 0.3 0.0" rpy="0.0 0.0 0.0"/>
+            <link name="Base"/>
+            <watchdog timeout="1.0"/>
+        </actuator>
 
-    <sensor name="base_link" rate="10.0" type="odometry">
-        <history samples="1"/>
-        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-        <link name="Base"/>
-        <ros_publisher topic="/boxy/odometry"/>
-    </sensor>
+        <actuator name="T3" type="simple_thruster">
+            <specs lower_thrust_limit="-100.0" upper_thrust_limit="100.0" inverted="false"/>
+            <propeller right="true">
+                <mesh filename="Cylinder.obj" scale="0.02"/>
+                <material name="Steel"/>
+                <look name="Red"/>
+            </propeller>
+            <origin xyz="-0.4 -0.3 0.0" rpy="0.0 0.0 0.0"/>
+            <link name="Base"/>
+            <watchdog timeout="1.0"/>
+        </actuator>
 
-    <world_transform xyz="0.0 0.0 2.0" rpy="0.0 0.0 0.0"/>
-</robot>
+        <actuator name="T4" type="simple_thruster">
+            <specs lower_thrust_limit="-100.0" upper_thrust_limit="100.0" inverted="false"/>
+            <propeller right="true">
+                <mesh filename="Cylinder.obj" scale="0.02"/>
+                <material name="Steel"/>
+                <look name="Red"/>
+            </propeller>
+            <origin xyz="0.4 -0.3 0.0" rpy="0.0 0.0 0.0"/>
+            <link name="Base"/>
+            <watchdog timeout="1.0"/>
+        </actuator>
+
+
+        <ros_subscriber thrusters="/my_thruster_setpoints"/>
+        <ros_publisher thrusters="/my_thruster_state"/>
+
+        <world_transform xyz="0.0 0.0 2.0" rpy="0.0 0.0 0.0"/>
+    </robot>
 
 
 </scenario>
