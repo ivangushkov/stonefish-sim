@@ -93,49 +93,49 @@
         </sensor>
    
         <actuator name="T1" type="simple_thruster">
-            <specs lower_thrust_limit="-100.0" upper_thrust_limit="100.0" inverted="false"/>
+            <specs lower_thrust_limit="-1000.0" upper_thrust_limit="1000.0" inverted="false"/>
             <propeller right="true">
                 <mesh filename="Cylinder.obj" scale="0.02"/>
                 <material name="Steel"/>
                 <look name="Red"/>
             </propeller>
-            <origin xyz="0.4 0.3 0.0" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.4 0.3 0.0" rpy="0.0 1.57 0.0"/>
             <link name="Base"/>
             <watchdog timeout="1.0"/>
         </actuator>
 
         <actuator name="T2" type="simple_thruster">
-            <specs lower_thrust_limit="-100.0" upper_thrust_limit="100.0" inverted="false"/>
+            <specs lower_thrust_limit="-1000.0" upper_thrust_limit="1000.0" inverted="false"/>
             <propeller right="true">
                 <mesh filename="Cylinder.obj" scale="0.02"/>
                 <material name="Steel"/>
                 <look name="Red"/>
             </propeller>
-            <origin xyz="-0.4 0.3 0.0" rpy="0.0 0.0 0.0"/>
+            <origin xyz="-0.4 0.3 0.0" rpy="0.0 1.57 0.0"/>
             <link name="Base"/>
             <watchdog timeout="1.0"/>
         </actuator>
 
         <actuator name="T3" type="simple_thruster">
-            <specs lower_thrust_limit="-100.0" upper_thrust_limit="100.0" inverted="false"/>
+            <specs lower_thrust_limit="-1000.0" upper_thrust_limit="1000.0" inverted="false"/>
             <propeller right="true">
                 <mesh filename="Cylinder.obj" scale="0.02"/>
                 <material name="Steel"/>
                 <look name="Red"/>
             </propeller>
-            <origin xyz="-0.4 -0.3 0.0" rpy="0.0 0.0 0.0"/>
+            <origin xyz="-0.4 -0.3 0.0" rpy="0.0 1.57 0.0"/>
             <link name="Base"/>
             <watchdog timeout="1.0"/>
         </actuator>
 
         <actuator name="T4" type="simple_thruster">
-            <specs lower_thrust_limit="-100.0" upper_thrust_limit="100.0" inverted="false"/>
+            <specs lower_thrust_limit="-1000.0" upper_thrust_limit="1000.0" inverted="false"/>
             <propeller right="true">
                 <mesh filename="Cylinder.obj" scale="0.02"/>
                 <material name="Steel"/>
                 <look name="Red"/>
             </propeller>
-            <origin xyz="0.4 -0.3 0.0" rpy="0.0 0.0 0.0"/>
+            <origin xyz="0.4 -0.3 0.0" rpy="0.0 1.57 0.0"/>
             <link name="Base"/>
             <watchdog timeout="1.0"/>
         </actuator>
