@@ -97,7 +97,7 @@
         </sensor>
    
         <actuator name="T1" type="simple_thruster">
-            <specs lower_thrust_limit="-1000.0" upper_thrust_limit="1000.0" inverted="false"/>
+            <specs lower_thrust_limit="-200.0" upper_thrust_limit="200.0" inverted="false"/>
             <propeller right="true">
                 <mesh filename="Cylinder.obj" scale="0.02"/>
                 <material name="Steel"/>
@@ -109,7 +109,7 @@
         </actuator>
 
         <actuator name="T2" type="simple_thruster">
-            <specs lower_thrust_limit="-1000.0" upper_thrust_limit="1000.0" inverted="false"/>
+            <specs lower_thrust_limit="-200.0" upper_thrust_limit="200.0" inverted="false"/>
             <propeller right="true">
                 <mesh filename="Cylinder.obj" scale="0.02"/>
                 <material name="Steel"/>
@@ -121,7 +121,7 @@
         </actuator>
 
         <actuator name="T3" type="simple_thruster">
-            <specs lower_thrust_limit="-1000.0" upper_thrust_limit="1000.0" inverted="false"/>
+            <specs lower_thrust_limit="-200.0" upper_thrust_limit="200.0" inverted="false"/>
             <propeller right="true">
                 <mesh filename="Cylinder.obj" scale="0.02"/>
                 <material name="Steel"/>
@@ -133,7 +133,7 @@
         </actuator>
 
         <actuator name="T4" type="simple_thruster">
-            <specs lower_thrust_limit="-1000.0" upper_thrust_limit="1000.0" inverted="false"/>
+            <specs lower_thrust_limit="-200.0" upper_thrust_limit="200.0" inverted="false"/>
             <propeller right="true">
                 <mesh filename="Cylinder.obj" scale="0.02"/>
                 <material name="Steel"/>
